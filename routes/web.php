@@ -53,4 +53,5 @@ Route::middleware('auth')->group(function () {
         ->name('verification.send');
 
     Route::get('/user/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
+    Route::post('/user/avatar', [DashboardController::class, 'setAvatar'])->name('user.avatar');
 });
