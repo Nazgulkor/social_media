@@ -5,6 +5,7 @@ use App\Http\Controllers\auth\LoginController;
 use App\Http\Controllers\auth\ForgotPasswordController;
 use App\Http\Controllers\auth\ResetPasswordController;
 use App\Http\Controllers\auth\EmailVerificationPromptController;
+use App\Http\Controllers\user\DashboardController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 /*
@@ -51,5 +52,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/email/verification-notification', [EmailVerificationPromptController::class, 'send'])
         ->name('verification.send');
 
-    Route::view('/dashboard', 'dashboard')->middleware('verified')->name('dashboard');
+    Route::get('/user/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
 });

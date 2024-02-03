@@ -18,3 +18,11 @@ body {
 .label_for_checkbox {
     @apply w-full py-4 ms-2 text-sm font-medium text-gray-900 dark:text-gray-300;
 }
+
+
+.header_links_default {
+    @apply text-sm text-gray-400 hover:text-gray-500;
+}
+.header_links_active {
+    @apply text-sm text-blue-600 font-bold;
+}
