@@ -1,5 +1,12 @@
 import './bootstrap';
 
+import.meta.glob([
+    '../images/**',
+
+  ]);
+
+
+
 document.addEventListener('DOMContentLoaded', function() {
     // open
     const burger = document.querySelectorAll('.navbar-burger');

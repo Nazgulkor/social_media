@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\user;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SetAvatarRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Storage;
+
 
 class DashboardController extends Controller
 {
@@ -16,12 +17,12 @@ class DashboardController extends Controller
         return view('user.dashboard', compact('user'));
     }
 
-    public function setAvatar(Request $request)
+    public function setAvatar(SetAvatarRequest $request)
     {
-        $userId = Auth::user()->id;
-        $data = $request->all();
-        $filename = $data['avatar']->getClientOriginalName();
-        $data['avatar']->move(Storage::path('/public/image/avatars/')."$userId/",$filename);
+
+        $request->validated();
+        $path = $request->file('avatar')->store('avatars/' . $request->user()->id);
+        dd($path);
         return redirect()->back();
     }
 }
