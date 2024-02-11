@@ -1,48 +1,27 @@
-import './bootstrap';
+import { burgerMenu, setAvatar, deleteAvatar } from "./utils";
+import "./bootstrap";
+import jQuery from "jquery";
+window.$ = jQuery;
+window.spinner = $("#spinner");
+const defaultAvatarUrl = import.meta.glob(
+    "./resources/images/default_avatar.jpg"
+)["./resources/images/default_avatar.jpg"];
+import.meta.glob(["../images/**"]);
 
-import.meta.glob([
-    '../images/**',
+document.addEventListener("DOMContentLoaded", burgerMenu);
 
-  ]);
+//setting avatar
+$("#avatar_input").on("change", function () {
+    $("#avatar_form").submit();
+});
+$("#avatar_form").on("submit", function (event) {
+    event.preventDefault();
+    window.spinner.removeClass("hidden");
+    setAvatar();
+});
 
-
-
-document.addEventListener('DOMContentLoaded', function() {
-    // open
-    const burger = document.querySelectorAll('.navbar-burger');
-    const menu = document.querySelectorAll('.navbar-menu');
-
-    if (burger.length && menu.length) {
-        for (var i = 0; i < burger.length; i++) {
-            burger[i].addEventListener('click', function() {
-                for (var j = 0; j < menu.length; j++) {
-                    menu[j].classList.toggle('hidden');
-                }
-            });
-        }
-    }
-
-    // close
-    const close = document.querySelectorAll('.navbar-close');
-    const backdrop = document.querySelectorAll('.navbar-backdrop');
-
-    if (close.length) {
-        for (var i = 0; i < close.length; i++) {
-            close[i].addEventListener('click', function() {
-                for (var j = 0; j < menu.length; j++) {
-                    menu[j].classList.toggle('hidden');
-                }
-            });
-        }
-    }
-
-    if (backdrop.length) {
-        for (var i = 0; i < backdrop.length; i++) {
-            backdrop[i].addEventListener('click', function() {
-                for (var j = 0; j < menu.length; j++) {
-                    menu[j].classList.toggle('hidden');
-                }
-            });
-        }
-    }
+$("#delete_avatar").on("click", function (event) {
+    event.preventDefault();
+    window.spinner.removeClass("hidden");
+    deleteAvatar();
 });

@@ -4,7 +4,6 @@ namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreRegisterRequest;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -27,10 +26,11 @@ class RegisterController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password)
         ]);
+        $token = $user->createToken($user->email)->plainTextToken;
 
         event(new Registered($user));
         Auth::login($user);
 
-        return redirect('/')->with('message', 'Подтвердите почту');
+        return redirect('/')->with(['message'=> 'Подтвердите почту', 'token' => $token]);
     }
 }

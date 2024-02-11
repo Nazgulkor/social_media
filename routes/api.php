@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Controllers\api\user\DashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
+
+
+
+Route::post('/user/avatar/change', [DashboardController::class, 'setAvatar'])->middleware('auth:sanctum');
+Route::get('/user/avatar/delete', [DashboardController::class, 'deleteAvatar'])->middleware('auth:sanctum');

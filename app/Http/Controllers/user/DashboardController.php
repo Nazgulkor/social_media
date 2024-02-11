@@ -17,12 +17,5 @@ class DashboardController extends Controller
         return view('user.dashboard', compact('user'));
     }
 
-    public function setAvatar(SetAvatarRequest $request)
-    {
 
-        $request->validated();
-        $path = $request->file('avatar')->store('avatars/' . $request->user()->id);
-        dd($path);
-        return redirect()->back();
-    }
 }

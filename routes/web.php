@@ -40,7 +40,7 @@ Route::middleware('guest')->group(function () {
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', fn () =>  'profile')->name('profile');
+
 
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
@@ -52,6 +52,5 @@ Route::middleware('auth')->group(function () {
     Route::post('/email/verification-notification', [EmailVerificationPromptController::class, 'send'])
         ->name('verification.send');
 
-    Route::get('/user/dashboard', [DashboardController::class, 'index'])->name('user.dashboard');
-    Route::post('/user/avatar', [DashboardController::class, 'setAvatar'])->name('user.avatar');
+    Route::get('/user/dashboard', [DashboardController::class, 'index'])->name('user.dashboard')->middleware('verified');
 });

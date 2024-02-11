@@ -23,6 +23,10 @@ body {
 .header_links_default {
     @apply text-sm text-gray-400 hover:text-gray-500;
 }
+
 .header_links_active {
     @apply text-sm text-blue-600 font-bold;
+}
+.absolute_center{
+    @apply absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2
 }

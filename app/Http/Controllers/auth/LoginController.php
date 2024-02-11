@@ -5,8 +5,9 @@ namespace App\Http\Controllers\auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreLoginRequest;
-use App\Providers\RouteServiceProvider;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -20,10 +21,13 @@ class LoginController extends Controller
 
         $credentials = $request->validated();
 
-        if(Auth::attempt($credentials, $request->boolean('remember'))){
+        if (Auth::attempt($credentials, $request->boolean('remember'))) {
             $request->session()->regenerate();
+            $authenticated_user = Auth::user();
+            $user = User::find($authenticated_user->id);
+            $token = $user->createToken($user->email)->plainTextToken;
 
-            return redirect()->intended();
+            return redirect('/')->with('token', $token);
         }
 
         throw ValidationException::withMessages([
@@ -31,7 +35,8 @@ class LoginController extends Controller
         ]);
     }
 
-    public function destroy(Request $request){
+    public function destroy(Request $request)
+    {
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
