@@ -20,9 +20,8 @@ class PostFactory extends Factory
     public function definition(): array
     {
         return [
-            'title' => fake()->sentence(),
             'content' => fake()->text(),
-            'image' => fake()->sentence(),
+            'image' => 'null',
             'user_id' => User::inRandomOrder()->first()->id,
         ];
     }
