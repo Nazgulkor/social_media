@@ -1,7 +1,7 @@
 <!-- post card -->
-<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
+<div class="w-full bg-white border border-gray-200 rounded-lg shadow mb-2">
     <a href="#">
-        <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
+        <img class="rounded-t-lg h-70 w-full" src="{{Vite::asset('resources/images/default_avatar.jpg')}}" alt="" />
     </a>
     <div class="p-5">
         <p class="mb-3 font-normal text-gray-700 ">

@@ -8,12 +8,12 @@
                     <div class="bg-white shadow rounded-lg p-6">
                         <div class="flex flex-col items-center">
                             <img id="dashboard_avatar"
-                                src="{{ Auth::user()->avatar
-                                    ? asset('storage/' . Auth::user()->avatar)
+                                src="{{ $user->avatar
+                                    ? asset('storage/' . $user->avatar)
                                     : Vite::asset('resources/images/default_avatar.jpg') }}"
                                 class="w-32 h-32 bg-gray-300 rounded-full mb-4 shrink-0">
 
-                            <h1 class="text-xl font-bold">{{ Auth::user()->name }}</h1>
+                            <h1 class="text-xl font-bold">{{ $user->name }}</h1>
                             <p class="text-gray-700">Software Developer</p>
                             <div class="mt-6 flex flex-wrap gap-4 justify-center">
                                 <form id="avatar_form">
@@ -29,7 +29,7 @@
                                                 data-original="#000000" />
                                         </svg>
                                         <span id="avatar_text">
-                                            {{ Auth::user()->avatar ? 'Поменять фото' : 'Установить фото' }}
+                                            {{ $user->avatar ? 'Поменять фото' : 'Установить фото' }}
                                         </span>
                                         <input type="file" id='avatar_input' class="hidden" name="avatar_input" />
                                     </label>
@@ -56,12 +56,26 @@
                         </div>
                     </div>
                 </div>
-                <div id="dashboard_content" class="col-span-4 sm:col-span-9 bg-white bg-white shadow rounded-lg p-6">
-                    <x-dashboard.post/>
-                    <x-dashboard.post/>
-
+                <div id="dashboard_content"
+                     class="col-span-4 sm:col-span-6 bg-white bg-white shadow rounded-lg p-6 flex flex-col items-center"
+                >
+                    @forelse($posts as $post)
+                        <x-dashboard.post/>
+                    @empty
+                        У вас пока нет записей Создайте!
+                    @endforelse
 
                 </div>
+
+                <div id="dashboard_tools"
+                     class="col-span-4 sm:col-span-3 bg-white bg-white shadow rounded-lg p-6 "
+                >
+                    <button type="button"
+                            class="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">
+                        Создать запись
+                    </button>
+                </div>
+
             </div>
         </div>
     </div>
